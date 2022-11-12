@@ -17,8 +17,8 @@ func main() {
 	app.Get("/", func(ctx *fiber.Ctx) error {
 		return ctx.SendStatus(200)
 	})
-	// ik, is POST :p
-	app.Get("/sentry", middleware.VerifySentrySignature, route.SentryRoute)
+
+	app.Post("/sentry", middleware.VerifySignature("SENTRY CLIENT SECRET"), route.SentryRoute)
 
 	log.Fatal(app.Listen(":1809"))
 }
