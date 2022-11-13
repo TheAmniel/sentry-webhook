@@ -20,5 +20,5 @@ func main() {
 
 	app.Post("/sentry", middleware.VerifySignature("SENTRY CLIENT SECRET"), route.SentryRoute)
 
-	log.Fatal(app.Listen(":1809"))
+	log.Fatal(app.Listen(":3000"))
 }
