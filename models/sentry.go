@@ -12,13 +12,13 @@ type SentryPayloadData struct {
 }
 
 type SentryPayloadDataError struct {
-	Title     string      `json:"title,omniempty"`
+	Title     string      `json:"title,omitempty"`
 	WebURL    string      `json:"web_url"`
 	Platform  string      `json:"platform"`
-	Message   string      `json:"message,omniempty"`
+	Message   string      `json:"message,omitempty"`
 	Project   int64       `json:"project"`
-	Tags      [][2]string `json:"tags,omniempty"`
-	Exception interface{} `json:"exception,omniempty"`
+	Tags      [][2]string `json:"tags,omitempty"`
+	Exception interface{} `json:"exception,omitempty"`
 }
 
 type SentryPayloadActor struct {
