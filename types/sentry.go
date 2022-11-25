@@ -1,17 +1,17 @@
-package models
+package types
 
-type SentryPayload struct {
-	Action string             `json:"action"`
-	Data   SentryPayloadData  `json:"data"`
-	Actor  SentryPayloadActor `json:"actor"`
+type Sentry struct {
+	Action string       `json:"action"`
+	Data   *SentryData  `json:"data"`
+	Actor  *SentryActor `json:"actor"`
 }
 
 // TODO: Add issue???
-type SentryPayloadData struct {
-	Error SentryPayloadDataError `json:"error"`
+type SentryData struct {
+	Error SentryDataError `json:"error"`
 }
 
-type SentryPayloadDataError struct {
+type SentryDataError struct {
 	Title     string      `json:"title,omitempty"`
 	WebURL    string      `json:"web_url"`
 	Platform  string      `json:"platform"`
@@ -21,7 +21,7 @@ type SentryPayloadDataError struct {
 	Exception interface{} `json:"exception,omitempty"`
 }
 
-type SentryPayloadActor struct {
+type SentryActor struct {
 	Type string `json:"type"`
 	Name string `json:"name"`
 	ID   int    `json:"id"`
