@@ -9,8 +9,8 @@ import (
 )
 
 func VerifySignature(secret string) fiber.Handler {
-	mac := hmac.New(sha256.New, []byte(secret))
 	return func(c *fiber.Ctx) error {
+		mac := hmac.New(sha256.New, []byte(secret))
 		if _, err := mac.Write(c.Body()); err != nil {
 			return err
 		}
@@ -19,7 +19,6 @@ func VerifySignature(secret string) fiber.Handler {
 		if digested != c.Get("Sentry-Hook-Signature") {
 			return c.SendStatus(401)
 		}
-
 		return c.Next()
 	}
 }
