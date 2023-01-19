@@ -14,6 +14,7 @@ import (
 func SentryRoute(c *fiber.Ctx) error {
 	var body sentry.Sentry
 	if err := c.BodyParser(&body); err != nil {
+		log.Printf("Error parser body: %v", err)
 		return c.SendStatus(400)
 	}
 
@@ -23,16 +24,15 @@ func SentryRoute(c *fiber.Ctx) error {
 	}
 	log.Printf("Received '%s.%s' webhook from Sentry.\n", resource, body.Action)
 
-	if resource == "error" {
-		return c.SendStatus(200)
-	}
-
 	switch resource {
 	case "error":
+		sentry.OnError()
 		return c.SendStatus(200)
 	case "event_alert":
+		sentry.OnEventAlert()
 		return c.SendStatus(200)
 	case "issue":
+		sentry.OnIssue()
 		return c.SendStatus(200)
 	default:
 		log.Printf("Unknown resource '%s.%s'", resource, body.Action)
